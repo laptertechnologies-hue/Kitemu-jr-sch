@@ -4,6 +4,7 @@ import { updateSEO } from '../utils/seo';
 
 export const Home: React.FC = () => {
   const [welcomeText, setWelcomeText] = useState('Welcome to Kitemu Junior School! We believe that Will Creates Way.');
+  const [heroImage, setHeroImage] = useState<string | null>(null);
 
   useEffect(() => {
     updateSEO(
@@ -17,6 +18,9 @@ export const Home: React.FC = () => {
         if (data.home_welcome) {
           setWelcomeText(data.home_welcome);
         }
+        if (data.home_hero_image) {
+          setHeroImage(data.home_hero_image);
+        }
       })
       .catch(err => console.error('Failed to fetch home content', err));
   }, []);
@@ -24,7 +28,17 @@ export const Home: React.FC = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="hero" id="home" style={{ backgroundColor: 'var(--primary-green)' }}>
+      <section 
+        className="hero" 
+        id="home" 
+        style={{ 
+          backgroundColor: 'var(--primary-green)',
+          backgroundImage: heroImage ? `url(${heroImage})` : 'none',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1>KITEMU JUNIOR SCHOOL</h1>

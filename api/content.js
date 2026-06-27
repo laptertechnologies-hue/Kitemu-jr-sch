@@ -1,5 +1,13 @@
 import { query } from './db.js';
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '4mb',
+    },
+  },
+};
+
 export default async function handler(req, res) {
   // CORS Headers (in case of local testing)
   res.setHeader('Access-Control-Allow-Credentials', true);
