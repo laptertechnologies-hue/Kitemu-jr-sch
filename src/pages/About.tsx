@@ -10,7 +10,7 @@ export const About: React.FC = () => {
       'Learn about Kitemu Junior School, our history, core values, and mission.'
     );
 
-    fetch('http://localhost:3001/api/content')
+    fetch('/api/content')
       .then(res => res.json())
       .then(data => {
         if (data.home_about) {

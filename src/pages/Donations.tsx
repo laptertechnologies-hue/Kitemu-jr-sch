@@ -4,7 +4,7 @@ export function Donations() {
   const [donationText, setDonationText] = useState('Loading...');
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/content')
+    fetch('/api/content')
       .then(res => res.json())
       .then(data => {
         if (data.donations_text) {

@@ -11,7 +11,7 @@ export const Home: React.FC = () => {
       'KITEMU JUNIOR SCHOOL - Nursery and Primary School located in Kitemu - Kivu, Kyengera Town Council. Registration for new pupils is in progress.'
     );
 
-    fetch('http://localhost:3001/api/content')
+    fetch('/api/content')
       .then(res => res.json())
       .then(data => {
         if (data.home_welcome) {

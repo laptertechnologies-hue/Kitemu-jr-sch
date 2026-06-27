@@ -13,7 +13,7 @@ export function Admin() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      fetch('http://localhost:3001/api/content')
+      fetch('/api/content')
         .then(res => res.json())
         .then(data => {
           setContent({
@@ -28,7 +28,7 @@ export function Admin() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:3001/api/login', {
+      const res = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -47,7 +47,7 @@ export function Admin() {
 
   const handleUpdate = async (key: string, value: string) => {
     try {
-      await fetch('http://localhost:3001/api/content', {
+      await fetch('/api/content', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ section_key: key, text_value: value })
