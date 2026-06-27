@@ -4,6 +4,7 @@ import { updateSEO } from '../utils/seo';
 export const Gallery: React.FC = () => {
   const [images, setImages] = useState<string[]>([]);
   const [heroImage, setHeroImage] = useState<string | null>(null);
+  const [events, setEvents] = useState<any[]>([]);
 
   useEffect(() => {
     updateSEO(
@@ -25,6 +26,11 @@ export const Gallery: React.FC = () => {
           setHeroImage(data.gallery_hero_image);
         }
       })
+      .catch(err => console.error(err));
+
+    fetch('/api/events')
+      .then(res => res.json())
+      .then(data => setEvents(data))
       .catch(err => console.error(err));
   }, []);
 
@@ -66,6 +72,29 @@ export const Gallery: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Events Section */}
+      {events.length > 0 && (
+        <div className="container section-padding" style={{ paddingTop: 0 }}>
+          <h2 className="section-title" style={{ marginTop: '20px' }}>School Events</h2>
+          <div className="grid-container">
+            {events.map(evt => (
+              <div key={evt.id} className="card" style={{ padding: 0, overflow: 'hidden' }}>
+                {evt.image_data && <img src={evt.image_data} alt={evt.title} style={{ width: '100%', height: '220px', objectFit: 'cover' }} />}
+                <div style={{ padding: '25px' }}>
+                  <h3 style={{ fontSize: '1.4rem', marginBottom: '10px' }}>{evt.title}</h3>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--primary-green)', marginBottom: '15px', fontWeight: 'bold' }}>
+                    <i className="fas fa-calendar-alt"></i> {new Date(evt.event_date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                  </p>
+                  <p style={{ fontSize: '1rem', lineHeight: '1.6' }}>
+                    {evt.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

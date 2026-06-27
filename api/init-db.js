@@ -27,7 +27,16 @@ export default async function handler(req, res) {
           address TEXT,
           status VARCHAR(50) DEFAULT 'Pending',
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
+        );
+
+        CREATE TABLE IF NOT EXISTS events (
+          id SERIAL PRIMARY KEY,
+          title VARCHAR(255) NOT NULL,
+          description TEXT NOT NULL,
+          image_data TEXT,
+          event_date DATE NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
       `);
       return res.status(200).json({ success: true, message: 'Admissions table created successfully' });
     } catch (err) {

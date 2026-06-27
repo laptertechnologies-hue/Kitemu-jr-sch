@@ -10,6 +10,8 @@ export function Admin() {
   
   const [content, setContent] = useState<Record<string, string>>({});
   const [admissions, setAdmissions] = useState<any[]>([]);
+  const [events, setEvents] = useState<any[]>([]);
+  const [newEvent, setNewEvent] = useState({ title: '', description: '', event_date: '', image_data: '' });
   
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -30,10 +32,20 @@ export function Admin() {
       });
   };
 
+  const fetchEvents = () => {
+    fetch('/api/events')
+      .then(res => res.json())
+      .then(data => {
+        setEvents(data);
+      })
+      .catch(err => console.error(err));
+  };
+
   useEffect(() => {
     if (isLoggedIn) {
       fetchContent();
       fetchAdmissions();
+      fetchEvents();
     }
   }, [isLoggedIn]);
 
@@ -103,6 +115,55 @@ export function Admin() {
     }
   };
 
+  const handleEventImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setMessage('Compressing event image...');
+    try {
+      const base64Image = await compressImage(file, 800, 0.7);
+      setNewEvent({ ...newEvent, image_data: base64Image });
+      setMessage('Image ready!');
+      setTimeout(() => setMessage(''), 2000);
+    } catch (err) {
+      setMessage('Failed to process image.');
+    }
+  };
+
+  const handleAddEvent = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage('Uploading event...');
+    try {
+      const res = await fetch('/api/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEvent)
+      });
+      if (res.ok) {
+        setMessage('Event added successfully!');
+        setNewEvent({ title: '', description: '', event_date: '', image_data: '' });
+        fetchEvents();
+      } else {
+        setMessage('Failed to add event.');
+      }
+    } catch (err) {
+      setMessage('Failed to add event.');
+    }
+    setTimeout(() => setMessage(''), 3000);
+  };
+
+  const handleDeleteEvent = async (id: number) => {
+    if (!window.confirm('Are you sure you want to delete this event?')) return;
+    setMessage('Deleting...');
+    try {
+      await fetch(`/api/events?id=${id}`, { method: 'DELETE' });
+      fetchEvents();
+      setMessage('Deleted successfully!');
+    } catch (err) {
+      setMessage('Failed to delete.');
+    }
+    setTimeout(() => setMessage(''), 3000);
+  };
+
   if (!isLoggedIn) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', backgroundColor: '#f4f7f6', padding: '20px' }}>
@@ -153,6 +214,12 @@ export function Admin() {
             onClick={() => setActiveTab('admissions')}
           >
             <i className="fas fa-users" style={{ marginRight: '10px' }}></i> Admissions
+          </li>
+          <li 
+            style={{ padding: '15px 20px', cursor: 'pointer', background: activeTab === 'events' ? 'rgba(255,255,255,0.1)' : 'transparent', borderLeft: activeTab === 'events' ? '4px solid var(--gold)' : '4px solid transparent' }}
+            onClick={() => setActiveTab('events')}
+          >
+            <i className="fas fa-calendar-alt" style={{ marginRight: '10px' }}></i> Events
           </li>
         </ul>
       </div>
@@ -316,6 +383,50 @@ export function Admin() {
                   </table>
                 </div>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* EVENTS TAB */}
+        {activeTab === 'events' && (
+          <div>
+            <h1 style={{ marginBottom: '30px', color: '#333' }}>Manage School Events</h1>
+            
+            <div className="card" style={{ marginBottom: '40px' }}>
+              <h2 style={{ marginBottom: '20px', borderBottom: '1px solid #eee', paddingBottom: '10px' }}>Add New Event</h2>
+              <form onSubmit={handleAddEvent} style={{ display: 'grid', gap: '15px' }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '5px' }}>Event Title *</label>
+                  <input type="text" value={newEvent.title} onChange={e => setNewEvent({...newEvent, title: e.target.value})} required style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '5px' }}>Date *</label>
+                  <input type="date" value={newEvent.event_date} onChange={e => setNewEvent({...newEvent, event_date: e.target.value})} required style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '5px' }}>Description *</label>
+                  <textarea value={newEvent.description} onChange={e => setNewEvent({...newEvent, description: e.target.value})} required rows={3} style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}></textarea>
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '5px' }}>Event Image</label>
+                  <input type="file" accept="image/*" onChange={handleEventImage} style={{ width: '100%' }} />
+                  {newEvent.image_data && <img src={newEvent.image_data} alt="Preview" style={{ marginTop: '10px', height: '100px', borderRadius: '5px', objectFit: 'cover' }} />}
+                </div>
+                <button type="submit" className="btn" style={{ marginTop: '10px' }}>Publish Event</button>
+              </form>
+            </div>
+
+            <h2 style={{ marginBottom: '20px' }}>Current Events</h2>
+            <div className="grid-container">
+              {events.length === 0 ? <p>No events found.</p> : events.map(evt => (
+                <div key={evt.id} className="card" style={{ padding: '15px' }}>
+                  {evt.image_data && <img src={evt.image_data} alt={evt.title} style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '5px', marginBottom: '15px' }} />}
+                  <h3 style={{ fontSize: '1.2rem', marginBottom: '10px' }}>{evt.title}</h3>
+                  <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '10px' }}><i className="fas fa-calendar"></i> {new Date(evt.event_date).toLocaleDateString()}</p>
+                  <p style={{ fontSize: '0.95rem', marginBottom: '15px', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{evt.description}</p>
+                  <button onClick={() => handleDeleteEvent(evt.id)} style={{ background: '#dc3545', color: 'white', border: 'none', padding: '8px 15px', borderRadius: '4px', cursor: 'pointer' }}>Delete Event</button>
+                </div>
+              ))}
             </div>
           </div>
         )}

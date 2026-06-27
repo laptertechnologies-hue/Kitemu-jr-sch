@@ -5,6 +5,8 @@ import { updateSEO } from '../utils/seo';
 export const Home: React.FC = () => {
   const [welcomeText, setWelcomeText] = useState('Welcome to Kitemu Junior School! We believe that Will Creates Way. Established with a strong commitment to academic excellence and moral uprightness, our school provides a nurturing environment where children from diverse backgrounds can thrive. Our dedicated staff works tirelessly to ensure that every pupil receives the attention, guidance, and resources they need to succeed both in their studies and in life. We invite you to explore our vibrant community.');
   const [heroImage, setHeroImage] = useState<string | null>(null);
+  const [events, setEvents] = useState<any[]>([]);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
 
   useEffect(() => {
     updateSEO(
@@ -21,8 +23,23 @@ export const Home: React.FC = () => {
         if (data.home_hero_image) {
           setHeroImage(data.home_hero_image);
         }
+        
+        // Load up to 3 gallery images for preview
+        const loadedImages: string[] = [];
+        for (let i = 1; i <= 3; i++) {
+          if (data[`gallery_image_${i}`]) {
+            loadedImages.push(data[`gallery_image_${i}`]);
+          }
+        }
+        setGalleryImages(loadedImages);
       })
       .catch(err => console.error('Failed to fetch home content', err));
+
+    // Fetch Events
+    fetch('/api/events?limit=3')
+      .then(res => res.json())
+      .then(data => setEvents(data))
+      .catch(err => console.error('Failed to fetch events', err));
   }, []);
 
   return (
