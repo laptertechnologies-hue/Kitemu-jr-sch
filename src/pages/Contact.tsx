@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { updateSEO } from '../utils/seo';
 
 export const Contact: React.FC = () => {
