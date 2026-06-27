@@ -78,7 +78,7 @@ export const Admissions: React.FC = () => {
       </div>
       
       <div className="container section-padding">
-        <div className="grid-container" style={{ gridTemplateColumns: '1fr 1fr' }}>
+        <div className="grid-container">
           
           <div className="section-box">
             <h2 style={{ color: 'var(--primary-green)', marginBottom: '20px' }}>Why Choose Kitemu?</h2>
@@ -140,12 +140,12 @@ export const Admissions: React.FC = () => {
                 <input type="text" name="parent_name" value={formData.parent_name} onChange={handleChange} required style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }} />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                <div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px' }}>
+                <div style={{ flex: '1 1 200px' }}>
                   <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Phone Number *</label>
                   <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }} />
                 </div>
-                <div>
+                <div style={{ flex: '1 1 200px' }}>
                   <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Email Address</label>
                   <input type="email" name="email" value={formData.email} onChange={handleChange} style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }} />
                 </div>

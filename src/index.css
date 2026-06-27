@@ -275,9 +275,7 @@ a {
 
 /* Page Banner (For other pages) */
 .page-banner {
-    background: linear-gradient(rgba(26, 93, 26, 0.85), rgba(26, 93, 26, 0.85)), url('/Green-field-secondary-school.jpg');
-    background-size: cover;
-    background-position: center;
+    background: var(--primary-green);
     height: 250px;
     display: flex;
     align-items: center;
