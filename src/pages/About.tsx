@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { updateSEO } from '../utils/seo';
 
 export const About: React.FC = () => {
-  const [aboutText, setAboutText] = useState('Located in Kitemu - Kivu, Kyengera Town Council, we offer quality education from Nursery to P.7.');
+  const [aboutText, setAboutText] = useState('Located in Kitemu - Kivu, Kyengera Town Council, we offer quality education from Nursery to Primary 7. Our mission is to nurture children into responsible citizens through academic excellence and strong moral values.');
+  const [heroImage, setHeroImage] = useState<string | null>(null);
 
   useEffect(() => {
     updateSEO(
@@ -16,16 +17,26 @@ export const About: React.FC = () => {
         if (data.home_about) {
           setAboutText(data.home_about);
         }
+        if (data.about_hero_image) {
+          setHeroImage(data.about_hero_image);
+        }
       })
       .catch(err => console.error(err));
   }, []);
 
   return (
     <div className="about-page">
-      <div className="page-banner">
-        <div>
-          <h1>About Kitemu Junior School</h1>
-          <p>Will Creates Way</p>
+      <div className="page-banner" style={{ 
+        backgroundImage: heroImage ? `url(${heroImage})` : 'none',
+        backgroundColor: heroImage ? 'transparent' : 'var(--primary-green)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        position: 'relative'
+      }}>
+        {heroImage && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.6)', zIndex: 1 }}></div>}
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <h1>About Us</h1>
+          <p>Learn more about our history, mission, and vision</p>
         </div>
       </div>
       

@@ -2,19 +2,37 @@ import React, { useEffect } from 'react';
 import { updateSEO } from '../utils/seo';
 
 export const Academics: React.FC = () => {
+  const [heroImage, setHeroImage] = useState<string | null>(null);
+
   useEffect(() => {
     updateSEO(
       'Academics - Kitemu Junior School',
       'Discover the academic programs at Kitemu Junior School. We offer Nursery and Primary education.'
     );
+
+    fetch('/api/content')
+      .then(res => res.json())
+      .then(data => {
+        if (data.academics_hero_image) {
+          setHeroImage(data.academics_hero_image);
+        }
+      })
+      .catch(err => console.error(err));
   }, []);
 
   return (
     <div className="academics-page">
-      <div className="page-banner">
-        <div>
+      <div className="page-banner" style={{ 
+        backgroundImage: heroImage ? `url(${heroImage})` : 'none',
+        backgroundColor: heroImage ? 'transparent' : 'var(--primary-green)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        position: 'relative'
+      }}>
+        {heroImage && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.6)', zIndex: 1 }}></div>}
+        <div style={{ position: 'relative', zIndex: 2 }}>
           <h1>Academics</h1>
-          <p>Excellence from Nursery to P.7</p>
+          <p>Nursery and Primary Education Excellence</p>
         </div>
       </div>
       

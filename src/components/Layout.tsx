@@ -8,6 +8,18 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formattedDate, setFormattedDate] = useState('');
+  const [schoolLogo, setSchoolLogo] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/content')
+      .then(res => res.json())
+      .then(data => {
+        if (data.school_logo) {
+          setSchoolLogo(data.school_logo);
+        }
+      })
+      .catch(err => console.error(err));
+  }, []);
 
   const toggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -41,7 +53,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="header-container">
           <Link to="/" className="logo-container" aria-label="KITEMU JUNIOR SCHOOL Home" onClick={closeMenu}>
             <img 
-              src="/kitemu-logo.jpg" 
+              src={schoolLogo || "/kitemu-logo.jpg"} 
               alt="KITEMU JUNIOR SCHOOL Logo" 
               className="logo-img" 
               width="65" 

@@ -3,6 +3,7 @@ import { updateSEO } from '../utils/seo';
 
 export const Gallery: React.FC = () => {
   const [images, setImages] = useState<string[]>([]);
+  const [heroImage, setHeroImage] = useState<string | null>(null);
 
   useEffect(() => {
     updateSEO(
@@ -20,14 +21,24 @@ export const Gallery: React.FC = () => {
           }
         }
         setImages(loadedImages);
+        if (data.gallery_hero_image) {
+          setHeroImage(data.gallery_hero_image);
+        }
       })
       .catch(err => console.error(err));
   }, []);
 
   return (
     <div className="gallery-page">
-      <div className="page-banner">
-        <div>
+      <div className="page-banner" style={{ 
+        backgroundImage: heroImage ? `url(${heroImage})` : 'none',
+        backgroundColor: heroImage ? 'transparent' : 'var(--primary-green)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        position: 'relative'
+      }}>
+        {heroImage && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.6)', zIndex: 1 }}></div>}
+        <div style={{ position: 'relative', zIndex: 2 }}>
           <h1>Gallery</h1>
           <p>A glimpse into life at Kitemu Junior School</p>
         </div>
