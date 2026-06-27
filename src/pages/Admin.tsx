@@ -105,22 +105,25 @@ export function Admin() {
 
   if (!isLoggedIn) {
     return (
-      <div className="container section-padding" style={{ maxWidth: '400px', margin: '100px auto' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Admin Dashboard Login</h2>
-        {message && <div style={{ padding: '10px', background: '#fee', color: 'red', marginBottom: '15px' }}>{message}</div>}
-        <form onSubmit={handleLogin}>
-          <div style={{ marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>Username</label>
-            <input type="text" value={username} onChange={e => setUsername(e.target.value)} style={{ width: '100%', padding: '10px' }} required />
-          </div>
-          <div style={{ marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>Password</label>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} style={{ width: '100%', padding: '10px' }} required />
-          </div>
-          <button type="submit" className="btn" style={{ width: '100%' }} disabled={loading}>
-            {loading ? 'Logging in...' : 'Login to Dashboard'}
-          </button>
-        </form>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', backgroundColor: '#f4f7f6', padding: '20px' }}>
+        <div className="card" style={{ maxWidth: '400px', width: '100%', margin: '0 auto', textAlign: 'center' }}>
+          <img src="/kitemu-logo.jpg" alt="Kitemu Junior School Logo" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%', marginBottom: '15px', border: '3px solid var(--primary-green)' }} />
+          <h2 style={{ marginBottom: '20px', color: 'var(--primary-green)' }}>Admin Login</h2>
+          {message && <div style={{ padding: '10px', background: '#fee', color: 'red', borderRadius: '5px', marginBottom: '15px' }}>{message}</div>}
+          <form onSubmit={handleLogin} style={{ textAlign: 'left' }}>
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#555' }}>Username</label>
+              <input type="text" value={username} onChange={e => setUsername(e.target.value)} style={{ width: '100%', padding: '12px', border: '1px solid #ddd', borderRadius: '5px', outline: 'none' }} required />
+            </div>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#555' }}>Password</label>
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} style={{ width: '100%', padding: '12px', border: '1px solid #ddd', borderRadius: '5px', outline: 'none' }} required />
+            </div>
+            <button type="submit" className="btn" style={{ width: '100%' }} disabled={loading}>
+              {loading ? 'Logging in...' : 'Login to Dashboard'}
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
