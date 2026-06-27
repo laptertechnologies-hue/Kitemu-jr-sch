@@ -16,6 +16,15 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       .then(data => {
         if (data.school_logo) {
           setSchoolLogo(data.school_logo);
+          
+          // Dynamically update the favicon (Browser Tab Icon)
+          let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
+          if (!link) {
+            link = document.createElement('link');
+            link.rel = 'icon';
+            document.head.appendChild(link);
+          }
+          link.href = data.school_logo;
         }
       })
       .catch(err => console.error(err));
