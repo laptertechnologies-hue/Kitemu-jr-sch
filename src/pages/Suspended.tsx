@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { updateSEO } from '../utils/seo';
 
-export const Suspended: React.FC = () => टुक
+export const Suspended: React.FC = () => {
   const [schoolLogo, setSchoolLogo] = useState<string | null>(null);
   useEffect(() => {
     updateSEO(
