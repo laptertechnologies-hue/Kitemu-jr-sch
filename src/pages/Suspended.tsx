@@ -1,12 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { updateSEO } from '../utils/seo';
 
-export const Suspended: React.FC = () => {
+export const Suspended: React.FC = () => टुक
+  const [schoolLogo, setSchoolLogo] = useState<string | null>(null);
   useEffect(() => {
     updateSEO(
       'Site Suspended',
       'This website has been temporarily suspended.'
     );
+
+    fetch('/api/content')
+      .then(res => res.json())
+      .then(data => {
+        if (data.school_logo) {
+          setSchoolLogo(data.school_logo);
+        }
+      })
+      .catch(err => console.error(err));
   }, []);
 
   return (
@@ -32,6 +42,11 @@ export const Suspended: React.FC = () => {
         borderRadius: '8px',
         boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
       }}>
+        {schoolLogo && (
+          <div style={{ marginBottom: '20px' }}>
+            <img src={schoolLogo} alt="School Logo" style={{ height: '80px', objectFit: 'contain' }} />
+          </div>
+        )}
         <h1 style={{ color: '#721c24', marginBottom: '20px', fontSize: '2.5rem' }}>Service Suspended</h1>
         <p style={{ fontSize: '1.2rem', color: '#555', marginBottom: '30px', lineHeight: '1.6' }}>
           This website is currently unavailable due to an outstanding administrative issue with the developer.
