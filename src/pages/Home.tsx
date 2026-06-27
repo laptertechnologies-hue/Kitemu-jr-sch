@@ -112,6 +112,46 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Events Section */}
+      {events.length > 0 && (
+        <section className="container section-padding" style={{ backgroundColor: 'white' }}>
+          <h2 className="section-title">Upcoming Events</h2>
+          <div className="grid-container">
+            {events.map(evt => (
+              <div key={evt.id} className="card" style={{ padding: 0, overflow: 'hidden' }}>
+                {evt.image_data && <img src={evt.image_data} alt={evt.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />}
+                <div style={{ padding: '20px' }}>
+                  <h3 style={{ fontSize: '1.3rem', marginBottom: '10px' }}>{evt.title}</h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--primary-green)', marginBottom: '10px', fontWeight: 'bold' }}>
+                    <i className="fas fa-calendar-alt"></i> {new Date(evt.event_date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                  </p>
+                  <p style={{ fontSize: '0.95rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                    {evt.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Gallery Preview Section */}
+      {galleryImages.length > 0 && (
+        <section className="container section-padding">
+          <h2 className="section-title">School Gallery</h2>
+          <div className="grid-container">
+            {galleryImages.map((src, idx) => (
+              <div key={idx} style={{ borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                <img src={src} alt={`Gallery Preview ${idx + 1}`} style={{ width: '100%', height: '250px', objectFit: 'cover', display: 'block' }} />
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '30px' }}>
+            <Link to="/gallery" className="btn btn-secondary">View Full Gallery</Link>
+          </div>
+        </section>
+      )}
+
       {/* Call to Action */}
       <section className="section-padding" style={{ background: 'linear-gradient(to right, var(--primary-green), var(--dark-green))', color: 'white', textAlign: 'center' }}>
         <h2 style={{ fontSize: '1.8rem', marginBottom: '15px', fontWeight: 700 }}>Registration in Progress!</h2>
