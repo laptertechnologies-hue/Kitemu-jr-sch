@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { updateSEO } from '../utils/seo';
 
 export const About: React.FC = () => {
-  const [aboutText, setAboutText] = useState('Located in Kitemu - Kivu, Kyengera Town Council, we offer quality education from Nursery to Primary 7. Our mission is to nurture children into responsible citizens through academic excellence and strong moral values.');
+  const [aboutText, setAboutText] = useState('Located in Kitemu - Kivu, Kyengera Town Council, Kitemu Junior School stands as a beacon of academic excellence and moral uprightness in our community. We offer quality education from Nursery to Primary 7, catering to the diverse needs of our growing student body. Our mission goes beyond textbooks; we are dedicated to nurturing children into responsible, confident, and compassionate citizens. By fostering a culture of discipline and hard work, we ensure that every pupil who passes through our gates is fully prepared to face the challenges of the modern world. Will Creates Way.');
   const [heroImage, setHeroImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const About: React.FC = () => {
       <div className="container section-padding">
         <div className="section-box">
           <h2>Our Story</h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
+          <p style={{ fontSize: '1rem', lineHeight: '1.8' }}>
             {aboutText}
           </p>
         </div>

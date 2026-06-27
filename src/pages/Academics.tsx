@@ -38,10 +38,24 @@ export const Academics: React.FC = () => {
       
       <div className="container section-padding">
         <div className="section-box">
-          <h2>Our Academic Program</h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-            At Kitemu Junior School, we focus on providing a strong educational foundation. Our curriculum is tailored to equip pupils with the knowledge and skills necessary for higher education and personal development. We teach core subjects along with extracurricular activities to ensure holistic development.
+          <h2>Our Academic Philosophy</h2>
+          <p style={{ fontSize: '1rem', lineHeight: '1.8', marginBottom: '20px' }}>
+            At Kitemu Junior School, we focus on providing a strong educational foundation that caters to the unique learning styles of every child. Our curriculum is specifically tailored to equip pupils with the vital knowledge, critical thinking skills, and moral values necessary for higher education and personal development.
           </p>
+          <p style={{ fontSize: '1rem', lineHeight: '1.8', marginBottom: '30px' }}>
+            We teach all core subjects including Mathematics, English, Science, and Social Studies, alongside enriching extracurricular activities like music, sports, and arts. Our goal is to ensure holistic development, turning out pupils who are not only academically competitive but also socially responsible.
+          </p>
+          
+          <div className="grid-container" style={{ marginTop: '40px' }}>
+            <div className="card" style={{ padding: '25px', textAlign: 'left' }}>
+              <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px', fontSize: '1.3rem' }}>Nursery Section</h3>
+              <p style={{ fontSize: '0.95rem' }}>Our Nursery section (Baby, Middle, and Top Class) offers a safe, playful, and engaging environment. We focus on early childhood development, basic literacy, numeracy, and social skills to prepare the little ones for primary education.</p>
+            </div>
+            <div className="card" style={{ padding: '25px', textAlign: 'left' }}>
+              <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px', fontSize: '1.3rem' }}>Primary Section</h3>
+              <p style={{ fontSize: '0.95rem' }}>From Primary 1 to Primary 7, our pupils undergo rigorous academic training aligned with the national curriculum. Our experienced teachers use interactive methods to make learning enjoyable while ensuring top performance in PLE examinations.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

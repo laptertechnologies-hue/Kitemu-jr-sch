@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const Donations: React.FC = () => {
-  const [donationsText, setDonationsText] = useState('Kitemu Junior School is committed to supporting orphans and vulnerable children in our community. Your donations help provide tuition, scholastic materials, and meals for these deserving children.');
+  const [donationsText, setDonationsText] = useState('Kitemu Junior School is deeply committed to supporting orphans and vulnerable children within our local community. We believe every child deserves the right to quality education regardless of their background. Your generous donations help us provide essential tuition, scholastic materials, daily meals, and medical care for these deserving children, ensuring they stay in school and build a brighter future. Every contribution makes a huge difference.');
   const [heroImage, setHeroImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const Donations: React.FC = () => {
       })
       .catch(err => {
         console.error('Failed to fetch donations text', err);
-        setDonationsText('Support our Orphans. Any donation helps us provide education and necessities to vulnerable children.');
+        setDonationsText('Kitemu Junior School is deeply committed to supporting orphans and vulnerable children within our local community. We believe every child deserves the right to quality education regardless of their background. Your generous donations help us provide essential tuition, scholastic materials, daily meals, and medical care for these deserving children, ensuring they stay in school and build a brighter future. Every contribution makes a huge difference.');
       });
   }, []);
 
@@ -40,7 +40,7 @@ export const Donations: React.FC = () => {
       <div className="container section-padding">
         <div className="section-box">
           <h2>Why Donate?</h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>{donationsText}</p>
+          <p style={{ fontSize: '1rem', lineHeight: '1.8' }}>{donationsText}</p>
           
           <div className="bank-info" style={{ marginTop: '40px' }}>
             <h4>Donation Channels</h4>

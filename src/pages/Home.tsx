@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { updateSEO } from '../utils/seo';
 
 export const Home: React.FC = () => {
-  const [welcomeText, setWelcomeText] = useState('Welcome to Kitemu Junior School! We believe that Will Creates Way.');
+  const [welcomeText, setWelcomeText] = useState('Welcome to Kitemu Junior School! We believe that Will Creates Way. Established with a strong commitment to academic excellence and moral uprightness, our school provides a nurturing environment where children from diverse backgrounds can thrive. Our dedicated staff works tirelessly to ensure that every pupil receives the attention, guidance, and resources they need to succeed both in their studies and in life. We invite you to explore our vibrant community.');
   const [heroImage, setHeroImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export const Home: React.FC = () => {
       {/* Admin Editable Content */}
       <section className="container section-padding" style={{ textAlign: 'center' }}>
         <h2 className="section-title">Welcome Message</h2>
-        <p style={{ fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.8' }}>
+        <p style={{ fontSize: '1rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.8' }}>
           {welcomeText}
         </p>
       </section>
@@ -97,9 +97,9 @@ export const Home: React.FC = () => {
 
       {/* Call to Action */}
       <section className="section-padding" style={{ background: 'linear-gradient(to right, var(--primary-green), var(--dark-green))', color: 'white', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '2.2rem', marginBottom: '20px', fontWeight: 700 }}>Registration in Progress!</h2>
-        <p style={{ fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 30px', opacity: 0.9 }}>
-          Join Kitemu Junior School today. We are enrolling pupils from Nursery to P.7.
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '15px', fontWeight: 700 }}>Registration in Progress!</h2>
+        <p style={{ fontSize: '1rem', maxWidth: '700px', margin: '0 auto 30px', opacity: 0.9 }}>
+          Join Kitemu Junior School today. We are currently enrolling pupils from Nursery to P.7 for the upcoming academic term. Secure your child's future by providing them with the best educational foundation in Kyengera Town Council.
         </p>
         <div>
           <Link to="/admissions" className="btn" style={{ background: 'white', color: 'var(--primary-green)', marginRight: '15px' }}>Apply Now</Link>

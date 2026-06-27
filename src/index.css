@@ -31,7 +31,8 @@ html {
 body {
     background-color: var(--light-bg);
     color: var(--text-dark);
-    line-height: 1.6;
+    line-height: 1.5;
+    font-size: 0.95rem;
     overflow-x: hidden;
 }
 
@@ -55,9 +56,9 @@ a {
 .section-title {
     text-align: center;
     color: var(--primary-green);
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     position: relative;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 700;
 }
 
@@ -257,15 +258,15 @@ a {
 }
 
 .hero h1 {
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    margin-bottom: 20px;
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    margin-bottom: 15px;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
     font-weight: 700;
 }
 
 .hero p {
-    font-size: clamp(1rem, 2vw, 1.4rem);
-    margin-bottom: 30px;
+    font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+    margin-bottom: 25px;
     color: #f0f0f0;
     max-width: 700px;
     margin-left: auto;
@@ -285,14 +286,14 @@ a {
 }
 
 .page-banner h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .page-banner p {
-    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    font-size: clamp(0.85rem, 2vw, 1rem);
     color: #c8e6c9;
 }
 
@@ -437,8 +438,8 @@ a {
 /* Grid System and Cards */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
     max-width: 1250px;
     margin: 0 auto;
 }
@@ -467,7 +468,7 @@ a {
 .card h3 {
     color: var(--primary-green);
     margin-bottom: 15px;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 /* HistoryTimeline Section (About Us) */
@@ -734,11 +735,11 @@ a {
 
 .section-box h2 {
     color: var(--primary-green);
-    margin-bottom: 25px;
-    padding-bottom: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 2px solid #e0e0e0;
     position: relative;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
 }
 
 .section-box h2::after {
