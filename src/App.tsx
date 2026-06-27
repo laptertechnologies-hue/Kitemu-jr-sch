@@ -8,24 +8,14 @@ import { Gallery } from './pages/Gallery';
 import { Contact } from './pages/Contact';
 import { Donations } from './pages/Donations';
 import { Admin } from './pages/Admin';
+import { Suspended } from './pages/Suspended';
 
 function App() {
   return (
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/academics" element={<Academics />} />
-          <Route path="/admissions" element={<Admissions />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/donations" element={<Donations />} />
-          <Route path="/admin" element={<Admin />} />
-          {/* Catch-all redirect to Home */}
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="*" element={<Suspended />} />
+      </Routes>
     </BrowserRouter>
   );
 }
