@@ -40,6 +40,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <header className="header" role="banner">
         <div className="header-container">
           <Link to="/" className="logo-container" aria-label="KITEMU JUNIOR SCHOOL Home" onClick={closeMenu}>
+            <img 
+              src="/kitemu-logo.jpg" 
+              alt="KITEMU JUNIOR SCHOOL Logo" 
+              className="logo-img" 
+              width="65" 
+              height="65" 
+              style={{ borderRadius: '50%', objectFit: 'cover' }}
+            />
             <div className="logo-text">
               <h3>KITEMU JUNIOR SCHOOL</h3>
               <span>Will Creates Way</span>
@@ -79,7 +87,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </NavLink>
             
             <NavLink to="/admin" className="login-btn" onClick={closeMenu}>
-              <i className="fas fa-user-shield"></i> Admin
+              <i className="fas fa-sign-in-alt"></i> Login
             </NavLink>
           </nav>
         </div>
